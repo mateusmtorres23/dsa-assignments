@@ -9,4 +9,4 @@ def famous_quote(author: str, quote: str) -> str:
     Returns:
         str: "<author> once said, '<quote>'"
     """
-    pass
+    return f"{author} once said, '{quote}'"

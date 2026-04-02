@@ -8,4 +8,4 @@ def personal_message(name: str) -> str:
     Returns:
         str: saudação no formato "Hello, <name>!"
     """
-    pass
+    return f"Hello, {name}!"

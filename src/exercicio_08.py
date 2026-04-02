@@ -8,4 +8,4 @@ def favorite_number(n: int) -> str:
     Returns:
         str: "Your favorite number is <n>"
     """
-    pass
+    return f"Your favorite number is {n}"

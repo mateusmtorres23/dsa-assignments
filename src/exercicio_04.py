@@ -8,4 +8,4 @@ def format_name(name: str) -> tuple[str, str, str]:
     Returns:
         tuple[str, str, str]: (lowercase, uppercase, titlecase)
     """
-    pass
+    return (name.lower(), name.upper(), name.title())

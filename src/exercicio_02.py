@@ -8,4 +8,4 @@ def simple_message(message: str) -> str:
     Returns:
         str: a mesma mensagem
     """
-    pass
+    return message
