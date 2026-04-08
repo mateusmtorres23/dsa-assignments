@@ -13,15 +13,23 @@ class MyArray(Array):
         self.data.append(value)
 
     def get(self, index: int) -> int:
+        if index < 0 or index >= len(self.data):
+            raise IndexError("Index out of bounds")
         return self.data[index]
 
     def set(self, index: int, value: int) -> None:
+        if index < 0 or index >= len(self.data):
+            raise IndexError("Index out of bounds")
         self.data[index] = value
 
     def remove(self, value: int) -> None:
+        if value not in self.data:
+            raise ValueError("Value not found in array")
         self.data.remove(value)
 
     def insert(self, index: int, value: int) -> None:
+        if index < 0 or index > len(self.data):
+            raise IndexError("Index out of bounds")
         self.data.insert(index, value)
 
     def __len__(self) -> int:
@@ -34,4 +42,4 @@ class MyArray(Array):
         self.data[index] = value
 
     def __repr__(self) -> str:
-        return f"MyArray({self.data})"
+        return f"{self.data}"
