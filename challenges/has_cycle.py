@@ -11,12 +11,12 @@ def has_cycle(graph: dict[str, list[str]]) -> bool:
 
             current_trail.add(node)
             not_visited.discard(node)
-            
+
             neighbor = graph.get(node, [])
 
             if neighbor:
                 node = neighbor[0]
             else:
                 node = None
-                
+
     return False

@@ -8,8 +8,11 @@ def group_anagrams(words: list[str]) -> list[list[str]]:
         else:
             anagrams_map[word] = [words[i]]
 
-    grouped_anagrams: list[list[str]] = [l for l in anagrams_map.values()]
+    grouped_anagrams: list[list[str]] = [
+        word_list for word_list in anagrams_map.values()
+        ]
 
     return grouped_anagrams
+
 
 print(group_anagrams(["amor", "roma", "mora", "carro", "arroc"]))
