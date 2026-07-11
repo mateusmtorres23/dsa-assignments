@@ -1,125 +1,63 @@
-import pytest
-
-from challenges.has_cycle import has_cycle
-
-from data_structures.graph_examples import (
-    GRAPH_WITHOUT_CYCLE,
-    GRAPH_WITH_CYCLE,
-    GRAPH_WITH_SELF_LOOP,
-    DISCONNECTED_GRAPH,
-    DISCONNECTED_GRAPH_WITH_CYCLE,
-)
+from src.my_node import MyNode
+from src.has_cycle import has_cycle
 
 
-@pytest.mark.parametrize(
-    "graph, expected",
-    [
-        pytest.param(
-            GRAPH_WITHOUT_CYCLE,
-            False,
-            id="simple-acyclic-graph",
-        ),
-        pytest.param(
-            GRAPH_WITH_CYCLE,
-            True,
-            id="simple-cycle",
-        ),
-        pytest.param(
-            GRAPH_WITH_SELF_LOOP,
-            True,
-            id="self-loop",
-        ),
-        pytest.param(
-            DISCONNECTED_GRAPH,
-            False,
-            id="disconnected-without-cycle",
-        ),
-        pytest.param(
-            DISCONNECTED_GRAPH_WITH_CYCLE,
-            True,
-            id="disconnected-with-cycle",
-        ),
-        pytest.param(
-            {},
-            False,
-            id="empty-graph",
-        ),
-    ],
-)
-def test_has_cycle(graph, expected):
+def create_linked_list(values):
+    if not values:
+        return None
 
-    result = has_cycle(graph)
+    head = MyNode(values[0])
+    current = head
 
-    assert result is expected
+    nodes = [head]
+
+    for v in values[1:]:
+        new_node = MyNode(v)
+        current.next = new_node
+        current = new_node
+        nodes.append(new_node)
+
+    return head, nodes
 
 
-def test_single_vertex_without_edges():
-
-    graph = {
-        "A": [],
-    }
-
-    assert has_cycle(graph) is False
+def test_no_cycle():
+    head, _ = create_linked_list([1, 2, 3])
+    assert has_cycle(head) is False
 
 
-def test_two_vertices_without_cycle():
-
-    graph = {
-        "A": ["B"],
-        "B": [],
-    }
-
-    assert has_cycle(graph) is False
+def test_empty():
+    assert has_cycle(None) is False
 
 
-def test_two_vertices_with_cycle():
-
-    graph = {
-        "A": ["B"],
-        "B": ["A"],
-    }
-
-    assert has_cycle(graph) is True
+def test_single_no_cycle():
+    head = MyNode(1)
+    assert has_cycle(head) is False
 
 
-def test_longer_cycle():
-
-    graph = {
-        "A": ["B"],
-        "B": ["C"],
-        "C": ["D"],
-        "D": ["A"],
-    }
-
-    assert has_cycle(graph) is True
+def test_single_with_cycle():
+    head = MyNode(1)
+    head.next = head
+    assert has_cycle(head) is True
 
 
-def test_cycle_not_reachable_from_first_node():
-
-    graph = {
-        "A": ["B"],
-        "B": [],
-        "C": ["D"],
-        "D": ["E"],
-        "E": ["C"],
-    }
-
-    assert has_cycle(graph) is True
+def test_cycle_middle():
+    head, nodes = create_linked_list([1, 2, 3, 4])
+    nodes[-1].next = nodes[1]
+    assert has_cycle(head) is True
 
 
-def test_preserves_graph():
+def test_cycle_at_start():
+    head, nodes = create_linked_list([1, 2, 3])
+    nodes[-1].next = head
+    assert has_cycle(head) is True
 
-    graph = {
-        "A": ["B"],
-        "B": ["C"],
-        "C": [],
-    }
 
-    original = {
-        node: neighbors.copy()
-        for node, neighbors in graph.items()
-    }
+def test_large_no_cycle():
+    head, _ = create_linked_list(list(range(50)))
+    assert has_cycle(head) is False
 
-    has_cycle(graph)
 
-    assert graph == original
+def test_large_with_cycle():
+    head, nodes = create_linked_list(list(range(50)))
+    nodes[-1].next = nodes[10]
+    assert has_cycle(head) is True

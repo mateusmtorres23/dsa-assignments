@@ -1,2 +1,13 @@
-[tool.pytest.ini_options]
-pythonpath = ["."]
+[project]
+name = "aed-menor-caminho"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "big-o==0.11.0",
+    "flake8==7.2.0",
+    "matplotlib==3.10.3",
+    "numpy==2.2.6",
+    "pytest==8.3.5",
+]

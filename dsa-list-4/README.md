@@ -6,7 +6,7 @@
 
 -----
 
-# Lista 02 — Estruturas de Dados
+# Lista 05 — Hashing, Árvores e Grafos
 
 Disciplina dos cursos de Engenharia de Software e Licenciatura em Computação  
 da Universidade de Pernambuco — Campus Garanhuns
@@ -15,17 +15,20 @@ da Universidade de Pernambuco — Campus Garanhuns
 
 ## 📌 Sobre a lista
 
-Nesta lista você irá implementar uma estrutura de dados baseada em um Tipo Abstrato de Dados (TAD) e aplicar algoritmos clássicos sobre ela.
+Esta é a última lista prática da disciplina e tem como objetivo consolidar os principais conceitos estudados nas unidades finais do curso.
+
+Diferentemente das listas anteriores, esta atividade utiliza problemas inspirados em entrevistas técnicas e processos seletivos da indústria de software. O foco está no desenvolvimento do raciocínio algorítmico, na escolha adequada de estruturas de dados e na construção de soluções corretas e eficientes.
 
 Serão trabalhados os seguintes conceitos:
 
-- Implementação de estruturas de dados
-- Separação entre interface e implementação
-- Manipulação de arrays
-- Busca e ordenação
-- Introdução a nós e listas encadeadas
+- Hash Maps
+- Recursão
+- Árvores
+- Busca em Profundidade (DFS)
+- Grafos
+- Análise de Complexidade
 
-Todas as soluções serão validadas por **testes automatizados com pytest**.
+Todas as soluções serão validadas por **testes automatizados com pytest**. Além da correção funcional, algumas questões também possuem restrições de complexidade assintótica.
 
 -----
 
@@ -33,22 +36,29 @@ Todas as soluções serão validadas por **testes automatizados com pytest**.
 
 Ao finalizar esta lista, você deverá ser capaz de:
 
-- Implementar uma estrutura de dados a partir de um contrato
-- Manipular dados através de operações básicas (inserção, remoção, acesso)
-- Implementar algoritmos de busca e ordenação
-- Compreender o comportamento dos algoritmos na prática
+- Utilizar Hash Maps para resolver problemas de busca e agrupamento
+- Utilizar dicionários para reduzir a complexidade de algoritmos
+- Percorrer árvores utilizando estratégias recursivas
+- Resolver problemas clássicos envolvendo grafos
+- Aplicar algoritmos de busca em profundidade
+- Explorar propriedades de Árvores Binárias de Busca (BST)
+- Analisar a eficiência de soluções em termos de tempo e espaço
 
 -----
 
 ## 🧠 Regras importantes
 
-Todas as implementações devem seguir obrigatoriamente:
-
-- ❌ Não alterar a interface fornecida (`Array`)
-- ❌ Não modificar os testes
-- ✅ Implementar a classe `MyArray`
-- ✅ Implementar os algoritmos solicitados
-- ✅ Código deve passar nos testes e no linter
+|     | Regra                                                                          |
+| --- | ------------------------------------------------------------------------------ |
+| ❌   | Não modificar os testes                                                        |
+| ❌   | Não alterar as estruturas de dados fornecidas                                  |
+| ❌   | Não utilizar bibliotecas externas não especificadas na lista                   |
+| ❌   | Não utilizar implementações prontas encontradas na internet                    |
+| ✅   | Implementar todas as funções solicitadas respeitando suas assinaturas          |
+| ✅   | O código deve passar em todos os testes automatizados                          |
+| ✅   | O código deve seguir o padrão definido pelo linter (`Flake8`)                  |
+| ⚠️   | Algumas questões possuem requisitos mínimos de eficiência                      |
+| ⚠️   | Soluções corretas podem falhar caso ultrapassem a complexidade máxima esperada |
 
 -----
 
@@ -57,18 +67,18 @@ Todas as implementações devem seguir obrigatoriamente:
 <details>
   <summary><strong>📤 Como entregar</strong></summary><br />
 
-### 🔹 Passo a passo da entrega
+### Passo a passo da entrega
 
-1. Faça um **fork** deste repositório para sua conta no GitHub  
-2. Desenvolva a solução no **seu repositório (fork)**  
-3. Ao finalizar, copie o link do seu repositório  
-4. Envie o link como resposta no *Classroom* da disciplina  
+1. Clone o repositório criado automaticamente
+2. Desenvolva sua solução
+3. Faça commits regularmente
+4. Envie suas alterações para o GitHub
 
 ### ⚠️ Importante
 
-- A lista deve ser desenvolvida individualmente  
-- Não é necessário abrir Pull Request neste repositório original, mas sim no seu `Fork`  
-- A correção será feita a partir do link enviado
+- A atividade deve ser desenvolvida individualmente
+- A correção será realizada automaticamente através dos testes disponibilizados
+- O resultado final será obtido a partir da última versão enviada antes do prazo
 
 </details>
 
@@ -79,11 +89,11 @@ Todas as implementações devem seguir obrigatoriamente:
 <details>
   <summary><strong>🚀 Passo a passo</strong></summary><br />
 
-1. Faça o fork do repositório e clone o seu fork:
+1. Clone o repositório:
 
 ```bash
-git clone <url-do-seu-fork>
-cd lista-02
+git clone <url-do-repositorio>
+cd aed-challenges-05
 ```
 
 2. Crie o ambiente virtual:
@@ -101,59 +111,73 @@ python3 -m pip install -r dev-requirements.txt
 
 </details>
 
-## Fluxo de desenvolvimento
+-----
 
-<details> <summary><strong>🔧 Antes de começar</strong></summary><br />
+## 🔄 Fluxo de desenvolvimento
 
-1. Verifique se está na *branch* `main`:
+<details>
+  <summary><strong>🔧 Antes de começar</strong></summary><br />
 
-```bash
-git checkout main
-```
-
-2. Crie sua própria *branch*:
+Verifique se todos os testes executam corretamente:
 
 ```bash
-git checkout -b seu-nome-lista-02
-```
-
-</details> <details> <summary><strong>💻 Durante o desenvolvimento</strong></summary><br />
-
-- Faça commits frequentes
-- Use mensagens claras
-- Execute os testes constantemente
-
-Comandos mais usados:
-
-```bash
-git status
-git add .
-git commit -m "mensagem"
-git push
+python3 -m pytest
 ```
 
 </details>
 
-## Estrutura da Lista de Exercícios
+<details>
+  <summary><strong>💻 Durante o desenvolvimento</strong></summary><br />
+
+Execute os testes frequentemente:
 
 ```bash
+python3 -m pytest
+```
+
+Ou execute apenas um desafio específico:
+
+```bash
+python3 -m pytest tests/test_group_anagrams.py
+```
+
+</details>
+
+-----
+
+## 🗂️ Estrutura da Lista
+
+```text
 .
 ├── img
 ├── README.md
 ├── dev-requirements.txt
-├── src
-│   ├── exercicio_01.py
-│   ├── exercicio_02.py
-│   └── ...
-├── tests
-│   ├── test_exercicio_01.py
-│   ├── test_exercicio_02.py
-│   └── ...
+├── challenges
+│   ├── group_anagrams.py
+│   ├── has_cycle.py
+│   ├── tree_height.py
+│   └── lowest_common_ancestor.py
+│
+├── data_structures
+│   ├── node.py
+│   ├── tree.py
+│   └── graph_examples.py
+│
+└── tests
+    ├── test_group_anagrams.py
+    ├── test_group_anagrams_complexity.py
+    ├── test_has_cycle.py
+    ├── test_has_cycle_complexity.py
+    ├── test_tree_height.py
+    ├── test_tree_height_complexity.py
+    └── test_lowest_common_ancestor.py
 ```
+
+-----
 
 ## 🧪 Testes
 
-Para executar os testes:
+Executar todos os testes:
 
 ```bash
 python3 -m pytest
@@ -165,205 +189,168 @@ Modo detalhado:
 python3 -m pytest -s -vv
 ```
 
-Executar teste específico:
+Executar um único arquivo de testes:
 
 ```bash
-python3 -m pytest tests/test_exercicio_01.py
+python3 -m pytest tests/test_tree_height.py
 ```
 
-## 🎛 Linter
+-----
 
-Esta lista de exercícios utiliza Flake8 para padronização do código.
+## 🎛️ Linter
 
-Execute:
+Esta lista utiliza Flake8 para padronização do código. Execute:
 
 ```bash
 python3 -m flake8
 ```
 
-⚠️ Código fora do padrão não será considerado válido.
+-----
+
+## 📈 Complexidade Assintótica
+
+Alguns desafios possuem limites máximos de complexidade. Os testes automatizados verificarão se sua solução atende aos requisitos mínimos de eficiência.
+
+| Notação    | Interpretação |
+| ---------- | ------------- |
+| O(1)       | Constante     |
+| O(log n)   | Logarítmica   |
+| O(n)       | Linear        |
+| O(n log n) | Linearítmica  |
+| O(n²)      | Quadrática    |
+
+> Uma solução funcional não necessariamente será considerada correta caso sua complexidade exceda a esperada para o problema.
+
+-----
 
 ## 🧩 Exercícios
 
-### 1 — Implementação do Array
+### 1 — Agrupando Anagramas
 
-> Implemente em `src/my_array.py`
+> Implemente em `challenges/group_anagrams.py`
 
-Implemente a classe `MyArray`, que deve seguir o contrato definido na classe `Array`.
+Dada uma lista de palavras, agrupe todas as palavras que sejam anagramas entre si.
 
-A estrutura deve armazenar **inteiros** e permitir operações básicas de manipulação de dados, como inserção, remoção, acesso e atualização.
+**Exemplo:**
 
-📌 Requisitos
-
-- A classe `MyArray` já está definida
-- Todos os métodos da interface devem ser implementados
-- Utilize a lista `self.data` como estrutura interna
-
------
-
-#### ⚠️ Restrições
-
-- ❌ Não alterar a interface `Array` em `src/array.py`
-
------
-
-#### 🔧 Métodos obrigatórios
-
-A classe deve implementar os seguintes métodos:
-
-| Método                 | Descrição                  |
-| ---------------------- | -------------------------- |
-| `append(value)`        | Adiciona elemento ao final |
-| `get(index)`           | Retorna elemento no índice |
-| `set(index, value)`    | Atualiza valor no índice   |
-| `remove(value)`        | Remove primeira ocorrência |
-| `insert(index, value)` | Insere elemento no índice  |
-
------
-
-#### 🧠 Métodos Mágicos adicionais
-
-Além dos métodos acima, implemente:
-
-| Método                      | Descrição                                     |
-| --------------------------- | --------------------------------------------- |
-| `__len__()`                 | Permite uso de `len(array)`                   |
-| `__getitem__(index)`        | Permite acesso com `array[index]`             |
-| `__setitem__(index, value)` | Permite atribuição com `array[index] = value` |
-| `__repr__()`                | Retorna representação do array                |
-
------
-
-#### Exemplo
+Entrada:
 
 ```python
-arr = MyArray()
-
-arr.append(1)
-arr.append(2)
-
-len(arr) # 2
-arr[0] # 1
-
-arr[1] = 5
-print(arr) # [1, 5]
-
-arr.insert(1, 3)
-print(arr) # [1, 3, 5]
-
-arr.remove(3)
-print(arr) # [1, 5]
+group_anagrams(["amor", "roma", "mora", "carro", "arroc"])
 ```
 
-### 2 — Busca Linear
+Saída:
 
-> Implemente em `src/linear_search.py`
+```python
+[
+    ["amor", "roma", "mora"],
+    ["carro", "arroc"]
+]
+```
 
-Implemente uma função de busca sobre a estrutura `MyArray`.
+**Complexidade esperada**
 
-A função deve localizar um valor no array e retornar o índice correspondente.
+```text
+O(n · k log k)
+```
+
+onde:
+
+- n é a quantidade de palavras;
+- k é o tamanho médio das palavras.
 
 -----
 
-#### 📌 Requisitos
+### 2 — Detectando Ciclos em Grafos
 
-- A função deve se chamar `linear_search`
-- Deve receber um `MyArray` e um valor inteiro como entrada
-- Deve retornar o índice do elemento, caso encontrado e `-1` caso não o encontre
+> Implemente em `challenges/has_cycle.py`
+
+Determine se um grafo possui ciclos. Retorne `True` caso exista pelo menos um ciclo, ou `False` caso contrário.
+
+**Complexidade esperada**
+
+```text
+O(V + E)
+```
+
+onde:
+
+- V é o número de vértices;
+- E é o número de arestas.
 
 -----
 
-#### 🔧 Assinatura esperada
+### 3 — Altura de uma Árvore
 
-```python
-def linear_search(array: MyArray, target: int) -> int:
+> Implemente em `challenges/tree_height.py`
+
+Utilizando as classes fornecidas, implemente uma função que retorne a altura de uma árvore binária.
+
+Considere a seguinte convenção:
+
+```text
+Árvore vazia -> altura -1
+Árvore contendo apenas a raiz -> altura 0
 ```
 
-#### Exemplo
+**Complexidade esperada**
 
-```python
-arr = MyArray()
-
-arr.append(10)
-arr.append(20)
-arr.append(30)
-
-linear_search(arr, 20) # 1
-linear_search(arr, 99) # -1
+```text
+O(n)
 ```
 
-### 3 — Busca Binária
+onde:
 
-> Implemente em `src/binary_search.py`
-
-Implemente uma função de busca binária sobre a estrutura `MyArray`.
-
-A busca binária deve ser realizada sobre um array **ordenado em ordem crescente**.
-
-#### 📌 Requisitos
-
-- A função deve se chamar `binary_search`
-- Deve receber um `MyArray` e um valor inteiro como entrada
-- Deve retornar o índice do elemento, caso encontrado e `-1` caso contrário
-
-#### 🔧 Assinatura esperada
-
-```python
-def binary_search(array: MyArray, target: int) -> int:
-```
-
-#### Exemplo
-
-```python
-arr = MyArray()
-
-arr.append(1)
-arr.append(3)
-arr.append(5)
-arr.append(7)
-
-binary_search(arr, 5) # 2
-binary_search(arr, 2) # -1
-```
-
-### 4 — Nó
-
-> Implemente em `src/node.py`
-
-Implemente a classe `Node`, que representa um elemento de uma estrutura encadeada.
-
-Cada nó deve armazenar um valor inteiro e uma referência para o próximo nó.
+- n é o número de nós da árvore.
 
 -----
 
-#### 📌 Requisitos
+### 4 — Menor Ancestral Comum
 
-- A classe deve se chamar `Node`
-- Deve possuir dois atributos:
-  - `value`: valor armazenado no nó
-  - `next`: referência para o próximo nó (ou `None`)
+> Implemente em `challenges/lowest_common_ancestor.py`
 
-#### Exemplo
+Considere uma Árvore Binária de Busca (BST).
 
-```python
-n1 = Node(1)
-n2 = Node(2)
+Dados dois valores existentes na árvore, determine o valor correspondente ao menor ancestral comum entre eles.
 
-n1.next = n2
+**Exemplo**
 
-n1.value # 1
-n1.next.value # 2
+```text
+        20
+       /  \
+     10    30
+    / \    / \
+   5  15  25 35
 ```
 
-### 🧠 Observações finais
+```python
+lowest_common_ancestor(root, 5, 15)
+```
 
-- Leia os testes com atenção — eles definem o comportamento esperado
-- Pequenos erros de lógica podem quebrar vários testes
-- Pense sempre em: entrada → processamento → saída
-- Não é permitido alterar os arquivos em `tests/`
-- Alterações nos testes irão reprovar automaticamente no CI
+Retorna:
 
-📚 Referência
+```python
+10
+```
 
-- [Entendendo Algoritmos — Aditya Bhargava](https://www.amazon.com.br/Entendendo-Algoritmos-Ilustrado-Programadores-Curiosos/dp/8575225634/)
-- [Material da disciplina](https://github.com/casm3/algoritmos-e-estruturas-de-dados)
+**Observação**
+
+Considere que os dois valores informados sempre existirão na árvore.
+
+-----
+
+## ⚠️ Observações finais
+
+- Leia os testes com atenção antes de implementar
+- Pense na complexidade antes de escrever qualquer código
+- Nem toda solução correta será eficiente o suficiente
+- Não altere arquivos dentro de `tests/`
+- Não altere as estruturas de dados fornecidas
+
+-----
+
+## 📚 Referências
+
+- *Entendendo Algoritmos* — Aditya Bhargava
+- *Cracking the Coding Interview* — Gayle Laakmann McDowell
+- Material da disciplina

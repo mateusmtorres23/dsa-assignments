@@ -1,4 +1,4 @@
-name: CI - Lista 05
+name: CI - Lista 03
 
 on:
   pull_request:
@@ -33,7 +33,7 @@ jobs:
           pip install -r dev-requirements.txt
 
       - name: 🎛 Rodar linter (flake8)
-        run: flake8 challenges tests
+        run: flake8 src tests
 
       - name: 🧪 Rodar testes
         run: pytest -v --timeout=2
